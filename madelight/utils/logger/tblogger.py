@@ -11,3 +11,6 @@ class TensorBoardLogger:
 
     def put_scalar(self, k, v, global_step):
         self._writer.add_summary(Summary(value=[Summary.Value(tag=k, simple_value=float(v))]), global_step)
+
+    def flush(self):
+        self._writer.flush()

@@ -3,6 +3,8 @@ import pickle
 
 import tensorflow as tf
 
+from ..utils.logger import TensorBoardLogger
+
 
 class TrainClock:
     def __init__(self):
@@ -57,3 +59,7 @@ class TrainHelper:
         self.saver.restore(self.sess, ckpt_path)
         with open(clock_path, 'rb') as fin:
             self.clock = pickle.load(fin)
+
+    def create_tbs(self, *tb_names):
+        self.tbs = [TensorBoardLogger(os.path.join(self.train_log_path, name)) for name in tb_names]
+        return self.tbs
